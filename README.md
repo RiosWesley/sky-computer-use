@@ -1,6 +1,6 @@
 # sky-computer-use (native, v0.3.0)
 
-Servidor MCP de **Computer Use nativo para Windows — sem Codex, sem login, sem helper externo**.
+Servidor MCP de **Computer Use nativo para Windows
 Com ele, o Claude controla apps nativos: screenshot da janela **mesmo ocluída** (PrintWindow),
 árvore de acessibilidade com índices, clique por elemento ou coordenada, digitação, teclas, scroll e drag.
 
@@ -12,11 +12,10 @@ Claude Code ──MCP stdio──▶ sky-computer-use ──▶ Win32/PowerShell
                                         └─▶ overlay WPF (banner + anel + Esc)
 ```
 
-## Requisitos (para você e seus amigos)
+## Requisitos
 
 - Windows 10/11, Node ≥ 22.
 - Nada mais: `npm install` baixa tudo (`@modelcontextprotocol/sdk`, `@nut-tree-fork/nut-js`, `screenshot-desktop`, `sharp`, `zod`).
-- Sem app Codex, sem conta ChatGPT, sem `codex-computer-use.exe`.
 
 ## Instalação
 
@@ -49,16 +48,14 @@ Verifique com `claude mcp get sky` (deve mostrar "Connected"). As ferramentas `m
 3. `get_window_state` → screenshot + coordenadas.
 4. Uma ação com `observe` → inspecione → repita.
 
-## Segurança visível (paridade com Codex)
+## Segurança visível 
 
 Durante qualquer ação numa janela, um overlay topmost click-through aparece:
 banner "● sky — IA está usando seu computador • Esc para parar" + anel no cursor.
 Some após ~15s sem ações ou ao encerrar o servidor.
 
 **Esc para parar:** o overlay detecta Esc físico, aborta a automação e as próximas
-chamadas exigem confirmação do usuário via elicitation (`confirmResume`) — mesma
-semântica do helper do Codex (exit 130).
-
+chamadas exigem confirmação do usuário via elicitation (`confirmResume`) 
 ## Aprovações
 
 Antes de tocar num app, o servidor pede aprovação via **MCP elicitation** (diálogo no Claude Code), com opção "Lembrar sempre".
@@ -80,7 +77,7 @@ Antes de tocar num app, o servidor pede aprovação via **MCP elicitation** (di�
 src/
   index.js              stdio + shutdown
   server.js             monta NativeClient + aprovações + ferramentas
-  config.js             só aprovações e imagem (sem Codex)
+  config.js             só aprovações e imagem 
   safety.js             bloqueio da tecla Windows
   native/
     win32.js            EnumWindows/GetWindowRect/SetForegroundWindow via PowerShell
@@ -95,7 +92,6 @@ src/
   approvals/            store (arquivo+sessão), prompter (elicitation), manager
   screenshots/          redução de imagem e conversão de coordenadas
   tools/                definições MCP (janelas, entrada, observação)
-  helper/               legado Codex (não usado na V1 nativa, mantido p/ referência)
 skill/windows-computer-use/SKILL.md
 test/                   segurança de teclas, escala, aprovações, mapa de teclas nativo
 scripts/e2e-calculator.mjs   teste real via MCP: abre Calculadora, digita 12+30, clica, fecha
